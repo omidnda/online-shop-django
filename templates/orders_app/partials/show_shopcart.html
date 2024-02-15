@@ -1,0 +1,93 @@
+  {% load humanize %}
+  <!-- Breadcrumb Section Begin -->
+  <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>سبد خرید</h2>
+                    <div class="breadcrumb__option">
+                        <a href="{% url 'main:index' %}">خانه</a>
+                        <span>سبد خرید</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Shoping Cart Section Begin -->
+<section class="shoping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="shoping__product">محصولات</th>
+                                <th>قیمت</th>
+                                <th>تعداد</th> 
+                                <th>قیمت کل</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in shop_cart %}
+                            <tr>
+                                <td class="shoping__cart__item">
+                                    <img style="width:150px" src="{{media_url}}{{item.product.product_image}}" alt="">
+                                    <h5>{{item.product.product_name}}</h5>
+                                </td>
+                                <td class="cart-table__column cart-table__column--price">
+                                    {% if item.final_price < item.price %}
+                                    <del>{{item.price|intcomma}} تومان</del>
+                                     تومان
+                                     {{item.final_price|intcomma}}
+                                     {% else %}
+                                    {{item.price|intcomma}} تومان
+                                    {% endif %}
+                                </td>
+                                <td class="shoping__cart__quantity">
+                                    <div class="quantity">
+                                        <div class="input_number">
+                                            <input id="qty_{{item.product.id}}" type="number" min="1" value="{{item.qty}}" style="width:60px">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="shoping__cart__total">
+                        
+                                    {{item.total_price}}
+                                </td>
+                                <td class="cart-table__column cart-table__column--remove">
+                                    <a type="button" class="btn btn-light btn-sm btn-svg-icon" onclick="delete_from_shop_cart({{item.product.id}})">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <a style="cursor:pointer"  class="primary-btn cart-btn cart-btn-right" onclick="update_shop_cart()"><span class="icon_loading" ></span>به روز رسانی</a>
+            </div>
+            <div class="col-lg-6">
+                <div class="shoping__checkout">
+                    <h5>قیمت نهایی</h5>
+                    <ul>
+                        <li>جمع کل<span>{{total_price|intcomma}}</span></li>
+                        <li>مالیات <span>{{tax}}</span></li>
+                        <li>مبلغ قابل پرداخت<span>{{order_final_price}}</span></li>
+                    </ul>
+                    <a class="primary-btn" style="cursor:pointer" href={% url 'orders:create_order' %}>ادامه خرید</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shoping Cart Section End -->

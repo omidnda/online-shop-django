@@ -1,0 +1,37 @@
+<div class="myaccordion">
+<div class="accordion">
+    <h4>ویژگی ها</h4>
+    {% for key,value in feature_dict.items %}
+    {% if value %}
+        <!-- span to target fix closing accordion -->
+        <span class="target-fix" id="accordion"></span>
+            
+        <!-- First Accoridon Option -->
+        <div>
+            <!-- span to target fix accordion -->
+            <span class="target-fix" id="accordion{{key.id}}"></span>
+            
+            <!-- Link to open accordion, hidden when open --> 
+            <a href="#accordion{{key.id}}" id="open-accordion1" title="open">{{key}}</a>
+            
+            <!-- Link to close accordion, hidden when closed -->
+            <a href="#accordion" id="close-accordion1" title="close">{{key}}</a> 
+            
+            <!-- Accorion content goes in this div -->
+            <div class="accordion-content">
+                {% for item in value %}
+                <label style="display:block">
+                    <span>                      
+                        <input id="item_{{item.id}}" name="feature" value="{{item.id}}" type="checkbox">                   
+                    <span >{{item.value_title}}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+</div>
+</div>
+
+
+

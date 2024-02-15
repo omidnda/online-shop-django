@@ -1,0 +1,23 @@
+{% extends 'main_template.html' %}
+{% block title %}نتیجه جستجو{% endblock title %}
+
+{% block content %}
+    {% if products %}
+        <div>
+            <div class="container">
+                <h3 style="text-align:center; color:green">نتیجه جستجو</h3>
+                <div class="product-flexbox">
+                    {% for product in products %}
+                        {% include "partials/products/product_box.html" %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container" style="padding:100px">
+            <h2 style="text-align:center; color:red">کالایی یافت نشد</h2>
+        </div>
+    {% endif %}
+{% endblock content %}
+
+

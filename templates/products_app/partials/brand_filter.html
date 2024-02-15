@@ -1,0 +1,13 @@
+
+<div class="sidebar__item" id="brand_container">
+    <h4>برند کالا</h4>
+    {% for brand in brands %}
+        <label class="custom-control custom-checkbox">
+            <input type="checkbox" id="brand_{{brand.id}}" name="brand" value="{{brand.id}}" class="custom-control-input" >
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">{{brand.brand_name}}</span>               
+        </label>
+    {% endfor %}
+</div>
+
+

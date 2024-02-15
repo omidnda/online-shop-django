@@ -1,0 +1,130 @@
+<div class="container mb-5 mt-5">			  
+  <div class="card">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="text-center mb-5">
+          دیدگاه شما
+        </h3>
+        <div class="row">
+          <div class="col-md-12">
+            {% for comment in product.comments_product.all %}
+              {% if comment.is_active %}
+                {% if comment.comment_parent == None %}
+            <div class="media">
+              <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
+                <div class="media-body">
+                  <div class="row">
+                    <div class="col-8 d-flex">
+                      <h5>{{comment.user1}}</h5>
+                    <span>- 2 hours ago</span>
+                    </div>
+                    {% if user.is_authenticated %}              
+                    <div class="col-4">              
+                      <div class="pull-right reply">              
+                        <a id="btn_{{comment.id}}" onclick="ShowCreateCommentForm({{product.id}},{{comment.id}},'{{product.slug}}')"><span><i class="fa fa-reply"></i> reply</span></a>             
+                      </div>  
+                      <div class="comment_form_{{comment.id}}"></div>           
+                    </div>
+                    {% endif %}
+                  </div>		
+                  {{comment.comment}}
+                  {% for item in comment.comments_child.all %}
+                      {% if item.is_active %}
+                  <div class="media mt-4">
+                    <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
+                    <div class="media-body">                   
+                      <div class="row">
+                        <div class="col-12 d-flex">
+                          <h5>{{comment.user1}}</h5>
+                          <span>- 3 hours ago</span>
+                        </div>             
+                      </div>
+                      {{comment.comment}}
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>    
+{% if user.is_authenticated %}
+  <h3 class="reviews-view__header" style="text-align:right">دیدگاه خود را بنویسید</h3>
+  <div class="row">
+     <div class="col-12 col-lg-9 col-xl-8">
+      {% render_partial "comments:create_comment" slug=product.slug %}
+     </div>
+  </div>
+  {% else %}
+  <h5 style="text-align:right">
+      برای درج دیدگاه حود باید
+      <a href="{% url 'accounts:login' %}?next=/products/{{product.slug}}">ورود</a>
+      یا
+      <a href="{% url 'accounts:register' %}?next=/products/{{product.slug}}">ثبت نام</a>
+      کنید
+  </h5>        
+{% endif %}
+
+
+
+
+
+
+<div class="product__details__tab__desc">
+  <div class="review-list"></div>
+  <ol class="review-list__content">
+      {% for comment in product.comments_product.all %}
+          {% if comment.is_active %}
+              {% if comment.comment_parent == None %}
+                  <li class="review-list__item" style="display:flex; justify-content:space-between">
+                      <div class="review__content">
+                          <div class="review__author">{{comment.user1}}</div>
+                          <div class="review__text">{{comment.comment}}</div>
+                      </div>
+                      <div>
+                          {% if user.is_authenticated %}
+                              <div>
+                                  <a class="btn btn-info" id="btn_{{comment.id}}" onclick="ShowCreateCommentForm({{product.id}},{{comment.id}},'{{product.slug}}')">پاسخ</a>
+                              </div>
+                              <div class="comment_form_{{comment.id}}"></div>
+                          {% endif %}
+                      </div>
+                  </li>
+                  {% for item in comment.comments_child.all %}
+                      {% if item.is_active %}
+                          <li class="review-list__item" style="display:flex; justify-content:space-between; background-color:beige;width:95%">
+                              <div class="review">
+                                  <div class="review__author">{{comment.user1.name}}</div>
+                                  <div class="review__text">{{comment.comment_text}}</div>
+                              </div>
+                          </li>
+                      {% endif %}
+                  {% endfor %}
+              {% endif %}
+          {% endif %}
+      {% endfor %}
+  </ol>
+</div>
+{% if user.is_authenticated %}
+  <h3 class="reviews-view__header" style="text-align:right">دیدگاه خود را بنویسید</h3>
+  <div class="row">
+     <div class="col-12 col-lg-9 col-xl-8">
+      {% render_partial "comments:create_comment" slug=product.slug %}
+     </div>
+  </div>
+  {% else %}
+  <h5 style="text-align:right">
+      برای درج دیدگاه حود باید
+      <a href="{% url 'accounts:login' %}?next=/products/{{product.slug}}">ورود</a>
+      یا
+      <a href="{% url 'accounts:register' %}?next=/products/{{product.slug}}">ثبت نام</a>
+      کنید
+  </h5>        
+{% endif %}

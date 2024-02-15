@@ -1,0 +1,15 @@
+<section class="categories">
+    <div class="container">
+        <div class="row">
+            <div class="categories__slider owl-carousel">
+                {% for product_group  in products_groups %}
+                <div class="col-lg-3">    
+                    <div class="categories__item set-bg" data-setbg="{{media_url}}{{product_group.image_name}}">
+                        <h5><a href="{% url 'products:all_products' slug=product_group.slug %}">{{product_group.group_name}}</a></h5>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

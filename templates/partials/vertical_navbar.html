@@ -1,0 +1,87 @@
+{% load render_partial %}
+
+<div class="container">
+    <div class="row">
+        {% if request.get_full_path == "/" %}
+        <div class="col-lg-3">
+            <div class="hero__categories">
+                <div class="hero__categories__all">
+                    <i class="fa fa-bars"></i>
+                    <span>محصولات</span>
+                </div>
+                <ul>
+                    {% for product_group in products_groups %}
+                    <li><a href="{% url 'products:all_products' slug=product_group.slug %}">{{product_group.group_name}}</a></li>
+                    {% endfor %} 
+                    <li><a href="{% url 'products:products_groups' %}">همه</a></li>
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+        {% if request.get_full_path == "/" %}
+        <div class="col-lg-9">
+            <div class="hero__search">
+                <div class="hero__search__form">
+                    <form action="{% url 'search:search_view' %}">
+                        <input name="q" type="text" placeholder="به دنبال چه کالایی هستید؟">
+                        <button type="submit" class="site-btn">جستجو</button>
+                    </form>
+                </div>
+                <div class="hero__search__phone">
+                    <div class="hero__search__phone__icon">
+                        <i class="fa fa-phone"></i>
+                    </div>
+                    <div class="hero__search__phone__text">
+                        <h5>+21 11.188.888</h5>
+                        <span>پشتیبانی شبانه روزی</span>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if request.get_full_path == "/" %}
+            {% render_partial "main:sliders" %}
+            {% endif %}
+        </div>
+    </div>
+    {% if request.get_full_path != "/"  %}
+     
+<div class="col-lg-12">
+    <div class="hero__search">
+        <div style="left:32%" class="hero__search__form">
+            <form action="{% url 'search:search_view' %}">
+                <input name="q" type="text" placeholder="به دنبال چه کالایی هستید؟">
+                <button type="submit" class="site-btn">جستجو</button>
+            </form>
+        </div>
+        <div class="hero__search__phone">
+            <div class="hero__search__phone__icon">
+                <i class="fa fa-phone"></i>
+            </div>
+            <div class="hero__search__phone__text">
+                <h5>+21 11.188.888</h5>
+                <span>پشتیبانی شبانه روزی</span>
+            </div>
+        </div>
+    </div>
+    <section style="padding:10px 10px"  class="breadcrumb-section set-bg" data-setbg="{{media_url}}/img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>ثبت نام</h2>
+                        <div class="breadcrumb__option">
+                            <a href="{% url 'main:index' %}">خانه</a>
+                            <a href="{% url 'accounts:register' %}"><span>ثبت نام</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endif %}
+
+
+</div>
+
+

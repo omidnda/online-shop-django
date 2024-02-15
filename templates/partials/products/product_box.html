@@ -1,0 +1,80 @@
+
+{% load humanize %}
+{% if type == 1 %}
+<div class="col-lg-4 col-md-6">
+    <div class="latest-product__text">
+        <h4>تازه ها</h4>
+        <div class="latest-product__slider owl-carousel">
+            <div class="latest-prdouct__slider__item">
+                {% for product in products|slice:":3" %}
+                <a href="{{product.get_absolute_url}}" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                        <img src="{{media_url}}{{product.product_image}}" alt="">
+                    </div>
+                    <div class="latest-product__item__text">
+                        <h6>{{product.product_name}}</h6>
+                        {% if product.get_number_in_warehause <= 0 %}
+                        <span style="color:red"><b>ناموجود</b></span>
+                        {% else %}
+                        <span>{{product.price|intcomma}} تومان</span>
+                        {% endif %}
+                    </div>
+                </a>
+                {% endfor %}
+            </div>                       
+            <div class="latest-prdouct__slider__item">
+                {% for product in products|slice:"3:6"  %}
+                <a href="{{product.get_absolute_url}}" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                    <a href="{{product.get_absolute_url}}"><img src="{{media_url}}{{product.product_image}}" alt=""></a> 
+                    </div>
+                    <div class="latest-product__item__text">
+                        <h6><a href="{% url 'products:product_deatails' slug=product.slug %}">{{product.product_name}}</a></h6>
+                        <span>{{product.price|intcomma}} تومان</span>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>  
+</div>   
+{% endif %}
+{% if type == 2 %}
+<div class="col-lg-4 col-md-6">
+    <div class="latest-product__text">
+        <h4>برترین ها</h4>
+        <div class="latest-product__slider owl-carousel">
+            <div class="latest-prdouct__slider__item">
+                {% for product in products|slice:":3" %}
+                <a href="{{product.get_absolute_url}}" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                        <img src="{{media_url}}{{product.product_image}}" alt="">
+                    </div>
+                    <div class="latest-product__item__text">
+                        <h6>{{product.product_name}}</h6>
+                        {% if product.get_number_in_warehause <= 0 %}
+                        <span style="color:red"><b>ناموجود</b></span>
+                        {% else %}
+                        <span>{{product.price|intcomma}} تومان</span>
+                        {% endif %}
+                    </div>
+                </a>
+                {% endfor %}
+            </div>                       
+            <div class="latest-prdouct__slider__item">
+                {% for product in products|slice:"3:6"  %}
+                <a href="{{product.get_absolute_url}}" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                    <a href="{{product.get_absolute_url}}"><img src="{{media_url}}{{product.product_image}}" alt=""></a> 
+                    </div>
+                    <div class="latest-product__item__text">
+                        <h6><a href="{% url 'products:product_deatails' slug=product.slug %}">{{product.product_name}}</a></h6>
+                        <span>{{product.price|intcomma}} تومان</span>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>  
+    </div>
+</div> 
+{% endif %}

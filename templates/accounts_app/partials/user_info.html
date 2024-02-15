@@ -1,0 +1,30 @@
+
+<div class="dashboard__profile card profile-card">
+    <div class="card-body profile-card__body">
+        <div class="profile-card__avatar"><img src="{{media_url}}images/unnamed.png" alt=""></div>
+        <div class="profile-card__name">{{user_info.name}} {{user_info.family}}</div>
+        <div class="profile-card__email">{{user_info.email}}</div>
+        <div class="profile-card__edit"><a href="{% url 'accounts:update_profile' %}" class="btn btn-secondary btn-sm" style="background:#00ff00;">ویرایش پروفایل</a></div>
+    </div>
+</div>
+<div class="dashboard__adress card adress-card adress-card--featured">
+    <div class="adress-card__badge"></div>
+    <div class="adress-card__body">
+        <div class="adress-card__name">{{user_info.name}} {{user_info.family}}</div>
+        <hr>
+        <div class="adress-card__row">{{user_info.birth_date}}</div>
+        <hr>
+        <div  class="adress-card__row">
+            <div class="adress-card__row-title">آدرس</div>
+            <div class="adress-card__row">{{user_info.adress}}</div>
+            <hr>
+            <div class="adress-card__row-title">شماره تلفن</div>
+            <div  class="adress-card__row-title-content"><span class="ltrt_text">{{user_info.mobile_number}}</span></div>
+            <hr>
+        </div>
+        <div class="adress-card__row-title">ایمیل آدرس</div>
+            <div  class="adress-card__row-title-content">{{user_info.email}}</div>
+            <div class="adress-card__row"></div>
+        </div>
+    </div>
+</div>

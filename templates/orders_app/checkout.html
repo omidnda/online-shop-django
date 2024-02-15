@@ -1,0 +1,100 @@
+{% extends 'main_template.html' %} 
+{% load render_partial %}
+
+{% block title %}فاکتور سفارش{% endblock title %}
+
+{% block content %}
+<section class="checkout spad">
+    <div class="container">
+        {% comment %} <div class="row">
+            <div class="col-lg-12">
+                <h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
+                </h6>
+            </div>
+        </div> {% endcomment %}
+        <div class="checkout__form">
+            <h4>اطلاعات شخصی</h4>
+            <form action="{% url 'orders:checkout_order' order_id=order.id %}" method="post" >
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <label for="">نام</label>
+                                    <p><span>*</span>{{form.name}}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <label for="">نام خانوادگی</label>
+                                    <p><span>*</span>{{form.family}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout__input">
+                            <label for="">آدرس</label>
+                            <p><span>*</span>{{form.adress}}</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <label for="">شماره موبایل</label>
+                                    <p><span>*</span>{{form.mobile_number}}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <label for="">ایمیل</label>
+                                    <p><span>*</span>{{form.email}}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <label for="">تاریخ تولد</label>
+                                    <p><span>*</span>{{form.birth_date}}</p>
+                                </div>
+                            </div>
+                        </div>          
+                        <div class="checkout__input">
+                            <label for="">توضیحات</label>
+                            <p>{{form.description}}</p>
+                        </div>
+                        <div>
+                            {{ form.payment_type}}
+                        </div>
+                        <button type="submit" class="site-btn col-lg-12">ثبت سفارش</button>
+                    </div> 
+                </form>              
+                    <div class="col-lg-6 col-md-4">
+                        <div class="checkout__order">
+                            <h4>سفارش شما</h4>
+                            <div class="checkout__order__products">کالاها <span>قیمت کل</span></div>
+                            <ul>
+                                {% for item in shop_cart  %}
+                                <li>{{item.product}}<span>{{item.total_price}}</span></li>
+                                {% endfor %}
+                            </ul>
+                            <div class="checkout__order__subtotal">جمع جز <span>{{total_price}}</span></div>
+                            <div class="checkout__order__subtotal">مالیات <span>{{tax}}</span></div>
+                            <div class="checkout__order__total">مبلغ قابل پرداخت <span>{{order_final_price}}</span></div>
+                            <div class="checkout__input__checkbox">
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="shoping__continue">
+                                <div class="shoping__discount">
+                                    <h5>اعمال کد تخفیف</h5>
+                                    <form action="{% url 'orders:apply_coupon' order_id=order.id %}" method="post">
+                                        {% csrf_token %}
+                                        {{coupon_form}}
+                                        <button style="width:258px" type="submit" class="btn btn-primary" style="font-family:tahoma;font:tahoma">استفاده کد تخفیف</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

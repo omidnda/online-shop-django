@@ -1,0 +1,30 @@
+{% extends 'main_template.html' %}
+
+{% block title %}ورود{%endblock title %}
+
+{% block content %}
+
+<section class="checkout spad" style="text-align: center;" dir="rtl">
+    <div class="container">
+        <div class="checkout__form"  style="text-align: right;">
+            <h4>ورود</h4>
+            <form action="" method="post">
+                <div class="row">
+                    <div class="col-lg-8 col-md-6" >
+                        <div class="row">
+                            <div class="col-lg-6" style="margin:auto;">
+                                {% csrf_token %}
+                                {{form.as_p}}
+                                <p>ساخت <a href="{% url 'accounts:register' %}" style="color:blue">حساب کاربری جدید</a></p>
+                                <p><a href="{% url 'accounts:remember_password' %}" style="color:blue">فراموشی گذرواژه</a></p>
+                                <button type="submit" class="site-btn">ورود</button>
+                            </div>      
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,19 @@
+
+<div class="price-range-wrap">
+        <h4>قیمت</h4>
+        <div class="card-body" style="padding: 0;">
+                <span><strong id="sel-price">{{min_max_price.min}}&nbsp;</strong>تومان</span>
+                <input style="width:250px;"  type="range" name="price" min="{{min_max_price.min}}" max="{{min_max_price.max}}" value="{{min_max_price.max}}" oninput="showVal(this.value)" onchange="showVal(this.value)">
+                <span style="color:red">{{min_max_price.max}}</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;              
+                <span style="color:red">{{min_max_price.min}}</span>
+        </div>
+</div>
+
+
+
+
+
+
+             

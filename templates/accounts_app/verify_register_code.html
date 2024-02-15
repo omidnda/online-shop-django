@@ -1,0 +1,30 @@
+{% extends 'main_template.html' %}
+
+{% block title %}تایید آدرس ایمیل {% endblock title %}
+
+{% block content %}
+
+<div class="page-header__title d-flex justify-content-center" style="padding: 100px; margin-bottom:50px">
+    <h3> تایید آدرس ایمیل</h3>
+</div>
+<div class="block" style="padding: 10px; margin-bottom:10px">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                <div class="card flex-grow-1 mb-md-0">
+                    <div class="card-body">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="form-group" dir="rtl">
+                                {{form.as_p}}
+                            </div>
+                            <button type="submit" class="site-btn btn"> تایید</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
